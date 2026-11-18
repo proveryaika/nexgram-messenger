@@ -1,43 +1,45 @@
 # NexGram
 
-NexGram is an original messaging app project. It aims to provide familiar messaging capabilities—direct chats, groups, channels, media sharing, reactions, search, and calls—using its own name, interface, code, and backend.
+NexGram is an original cross-platform messaging app project. It aims to offer familiar messaging workflows—direct chats, groups, channels, media sharing, reactions, search, and calls—under its own brand and implementation.
 
-> This project is not affiliated with Telegram. It does not copy Telegram's source code, branding, or proprietary assets.
+NexGram is not affiliated with Telegram. It does not use Telegram's source code, proprietary assets, or branding.
 
-## Project status
+## Current status
 
-Early client prototype. The current screens use local sample data only. No real accounts, message delivery, encryption, uploads, push notifications, or calls are implemented yet.
+**Early UI prototype.** The repository contains an Expo + React Native + TypeScript app with:
+- Dark-themed chat list and local search
+- Conversation screen with a local-only message composer
+- Sample contacts, channel directory, and settings screens
+- Product and architecture notes
 
-## Stack
-
-- Expo + React Native + TypeScript
-- Expo Router for navigation
-- Backend integration will be selected and configured later
-- Secrets and service credentials must stay out of the client and Git history
+The prototype has no production backend. Messages are not delivered to other users. Real accounts, phone verification, media uploads, push notifications, online presence, calls, and end-to-end encryption are not implemented.
 
 ## Run locally
+
+Requirements: Node.js LTS and a recent Android/iOS simulator or Expo Go-compatible device.
 
 ```bash
 npm install
 npx expo start
 ```
 
+Use the Expo terminal shortcuts to open Android, iOS, or web where supported.
+
 ## Planned milestones
 
-1. App shell, navigation, chat list, and conversation UI
-2. Authentication with verified phone-number ownership and abuse protection
-3. Server-backed messaging, groups, channels, and media storage
-4. Push notifications, presence, search, and multi-device sessions
-5. Voice/video calling and security review
+1. Complete the client navigation and interaction prototype
+2. Design and implement secure authentication and account/session management
+3. Add backend persistence, realtime delivery, groups, and channels
+4. Add safe media upload and push notifications
+5. Add calling and perform security, privacy, and accessibility reviews
 
-## Security notes
+## Security
 
-- Demo data is not real user data.
 - Never commit API keys, passwords, signing keys, or production secrets.
-- Production authentication must use a legitimate verification provider; demo codes must be clearly marked as test-only.
-- Authorization and owner-only features must be enforced by the server, not only hidden in the UI.
-- Do not describe the app as end-to-end encrypted until its protocol has been independently reviewed.
+- Production phone verification must use a legitimate verification provider; demo codes must be clearly marked as test-only.
+- Enforce authorization, rate limits, and ownership rules on the server, not only in the UI.
+- Do not claim end-to-end encryption until a protocol is implemented and independently reviewed.
 
 ## License
 
-No license has been added yet. Until one is chosen, the code is not granted an open-source reuse license.
+No license has been added. The source is not currently granted an open-source reuse license.
