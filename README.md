@@ -43,3 +43,19 @@ Use the Expo terminal shortcuts to open Android, iOS, or web where supported.
 ## License
 
 No license has been added. The source is not currently granted an open-source reuse license.
+
+
+## API server (foundation)
+
+A separate Node.js + TypeScript API service now lives in `server/`.
+
+```bash
+cd server
+npm install
+cp .env.example .env
+npm run dev
+```
+
+The local API listens on `http://localhost:4000`. Check `GET /health` and `GET /v1/status`.
+
+**Important:** this is only the server foundation. Database persistence, real phone verification, authenticated accounts, messaging, realtime delivery, and media storage are not connected yet. The phone-code endpoint intentionally stays disabled until a legitimate verification provider is configured. See [server/README.md](server/README.md) for details.
