@@ -2,9 +2,12 @@
   "expo": {
     "name": "NexGram",
     "slug": "nexgram",
+    "scheme": "nexgram",
     "version": "0.1.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
+    "plugins": ["expo-router"],
+    "experiments": { "typedRoutes": true },
     "ios": { "supportsTablet": true, "bundleIdentifier": "com.nexgram.messenger" },
     "android": { "package": "com.nexgram.messenger" }
   }
