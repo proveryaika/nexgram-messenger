@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "NexGram",
+    "slug": "nexgram",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.nexgram.messenger" },
+    "android": { "package": "com.nexgram.messenger" }
+  }
+}
