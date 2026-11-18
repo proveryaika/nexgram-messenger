@@ -1,5 +1,6 @@
 import { router } from "expo-router";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { useState } from "react";
 
 const chats = [
   { id: "design", name: "Design team", message: "Maya: The new concept is ready", time: "18:04", unread: 3, color: "#7357D8" },
@@ -16,18 +17,18 @@ export default function ChatsScreen() {
           <Text style={styles.kicker}>MESSAGES</Text>
           <Text style={styles.title}>NexGram</Text>
         </View>
-        <Pressable accessibilityRole="button" style={styles.newButton} onPress={() => {}}>
+        <Pressable accessibilityRole="button" style={styles.newButton} onPress={() => router.push("/channels")}>
           <Text style={styles.newButtonText}>＋</Text>
         </Pressable>
       </View>
-      <View style={styles.search}><Text style={styles.searchText}>⌕   Search chats and people</Text></View>
+      <View style={styles.search}><Text style={styles.searchText}>⌕</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search chats and people" placeholderTextColor="#8190A3" style={styles.searchInput}/></View>
       <View style={styles.tabs}>
         <Text style={styles.activeTab}>All chats</Text>
         <Text style={styles.tab}>Personal</Text>
         <Text style={styles.tab}>Groups</Text>
       </View>
       <ScrollView contentContainerStyle={styles.list}>
-        {chats.map((chat) => (
+        {filteredChats.map((chat) => (
           <Pressable key={chat.id} style={styles.chat} onPress={() => router.push({ pathname: "/chat/[id]", params: { id: chat.id, name: chat.name } })}>
             <View style={[styles.avatar, { backgroundColor: chat.color }]}><Text style={styles.avatarText}>{chat.name.slice(0, 1)}</Text></View>
             <View style={styles.chatCopy}>
@@ -37,7 +38,7 @@ export default function ChatsScreen() {
           </Pressable>
         ))}
       </ScrollView>
-      <View style={styles.bottom}><Text style={styles.bottomActive}>Chats</Text><Text style={styles.bottomItem}>Contacts</Text><Text style={styles.bottomItem}>Settings</Text></View>
+      <View style={styles.bottom}><Text style={styles.bottomActive}>Chats</Text><Pressable onPress={() => router.push("/contacts")}><Text style={styles.bottomItem}>Contacts</Text></Pressable><Pressable onPress={() => router.push("/settings")}><Text style={styles.bottomItem}>Settings</Text></Pressable></View>
       <Text style={styles.footnote}>Preview build · sample conversations only</Text>
     </View>
   );
@@ -50,8 +51,8 @@ const styles = StyleSheet.create({
   title: { color: "#F4F7FB", fontSize: 30, fontWeight: "800", marginTop: 3 },
   newButton: { backgroundColor: "#6D5AE6", width: 44, height: 44, borderRadius: 15, alignItems: "center", justifyContent: "center" },
   newButtonText: { color: "white", fontSize: 28, lineHeight: 30 },
-  search: { marginHorizontal: 20, marginTop: 24, backgroundColor: "#151E2A", borderRadius: 14, padding: 15 },
-  searchText: { color: "#8190A3", fontSize: 14 },
+  search: { marginHorizontal: 20, marginTop: 24, backgroundColor: "#151E2A", borderRadius: 14, padding: 13, flexDirection: "row", alignItems: "center", gap: 10 },
+  searchText: { color: "#8190A3", fontSize: 20 },\n  searchInput: { color: "#F4F7FB", fontSize: 14, flex: 1, padding: 0 },
   tabs: { flexDirection: "row", gap: 24, paddingHorizontal: 22, paddingVertical: 22 },
   activeTab: { color: "#A99CFF", fontWeight: "700" },
   tab: { color: "#7D8A9B" },
