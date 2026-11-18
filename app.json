@@ -7,7 +7,14 @@
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "plugins": ["expo-router"],
-    "experiments": { "typedRoutes": true },
+    "experiments": {
+      "typedRoutes": true,
+      "baseUrl": "/nexgram-messenger"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
     "ios": { "supportsTablet": true, "bundleIdentifier": "com.nexgram.messenger" },
     "android": { "package": "com.nexgram.messenger" }
   }
