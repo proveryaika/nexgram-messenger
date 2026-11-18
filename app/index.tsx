@@ -1,19 +1,21 @@
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from "react-native";
+import { useLanguage } from "../lib/i18n";
 
 type Chat = { id: string; name: string; message: string; time: string; unread: number; color: string; online?: boolean; kind: "personal" | "group" | "channel" | "bot" };
 
 const filters = [
-  { id: "All", label: "All chats" },
-  { id: "personal", label: "Personal" },
-  { id: "group", label: "Groups" },
-  { id: "channel", label: "Channels" },
-  { id: "bot", label: "Bots" },
+  { id: "All", label: "allChats" },
+  { id: "personal", label: "personal" },
+  { id: "group", label: "groups" },
+  { id: "channel", label: "channels" },
+  { id: "bot", label: "bots" },
 ] as const;
 
 export default function ChatsScreen() {
   const { width } = useWindowDimensions();
+  const { t } = useLanguage();
   const desktop = width >= 820;
   const [query, setQuery] = useState("");
   const [tab, setTab] = useState<string>("All");
@@ -29,12 +31,12 @@ export default function ChatsScreen() {
       <View style={s.sidebar}>
         <View style={s.top}>
           <Pressable accessibilityRole="button" accessibilityLabel="Open settings" style={s.menuButton} onPress={() => router.push("/settings")}><Text style={s.menuText}>☰</Text></Pressable>
-          <View style={s.brandLine}><View style={s.logo}><Text style={s.logoText}>N</Text></View><View><Text style={s.kicker}>MESSENGER</Text><Text style={s.title}>NexGram</Text></View></View>
+          <View style={s.brandLine}><View style={s.logo}><Text style={s.logoText}>N</Text></View><View><Text style={s.kicker}>{t("messenger")}</Text><Text style={s.title}>NexGram</Text></View></View>
           <Pressable accessibilityRole="button" accessibilityLabel="Create a new chat" style={s.newButton} onPress={() => router.push("/new-chat")}><Text style={s.newButtonText}>＋</Text></Pressable>
         </View>
-        <View style={s.search}><Text style={s.searchIcon}>⌕</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search" placeholderTextColor="#8190A3" style={s.searchInput}/><Text style={s.searchHint}>⌘ K</Text></View>
+        <View style={s.search}><Text style={s.searchIcon}>⌕</Text><TextInput value={query} onChangeText={setQuery} placeholder={t("search")} placeholderTextColor="#8190A3" style={s.searchInput}/><Text style={s.searchHint}>⌘ K</Text></View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.tabs}>
-          {filters.map(item => <Pressable key={item.id} onPress={() => setTab(item.id)} style={[s.tab, tab === item.id && s.tabActive]}><Text style={[s.tabText, tab === item.id && s.tabTextActive]}>{item.label}</Text></Pressable>)}
+          {filters.map(item => <Pressable key={item.id} onPress={() => setTab(item.id)} style={[s.tab, tab === item.id && s.tabActive]}><Text style={[s.tabText, tab === item.id && s.tabTextActive]}>{t(item.label)}</Text></Pressable>)}
         </ScrollView>
         <View style={s.sectionLine}><Text style={s.sectionLabel}>{tab === "All" ? "ALL CHATS" : filters.find(item => item.id === tab)?.label.toUpperCase()}</Text><Text style={s.sectionCount}>{filteredChats.length}</Text></View>
         <ScrollView contentContainerStyle={s.list}>
@@ -42,16 +44,16 @@ export default function ChatsScreen() {
             <View style={[s.avatar, { backgroundColor: chat.color }]}><Text style={s.avatarText}>{chat.name.slice(0, 1)}</Text>{chat.online && <View style={s.onlineDot}/>}</View>
             <View style={s.chatCopy}><View style={s.chatHeading}><Text numberOfLines={1} style={s.name}>{chat.name}</Text><Text style={s.time}>{chat.time}</Text></View><View style={s.chatHeading}><Text numberOfLines={1} style={s.message}>{chat.message}</Text>{chat.unread > 0 && <View style={s.unread}><Text style={s.unreadText}>{chat.unread}</Text></View>}</View></View>
           </Pressable>)}
-          {filteredChats.length === 0 && <View style={s.emptyWrap}><View style={s.emptyIcon}><Text style={s.emptyIconText}>✉</Text></View><Text style={s.emptyTitle}>{query.trim() ? "No results" : tab === "All" ? "No chats yet" : "Nothing here yet"}</Text><Text style={s.emptyText}>{query.trim() ? "Try another name or message." : "Start a conversation and it will appear here. Your chats stay synced here once account sync is connected."}</Text><Pressable accessibilityRole="button" style={s.startButton} onPress={() => router.push("/new-chat")}><Text style={s.startButtonText}>New message</Text></Pressable></View>}
+          {filteredChats.length === 0 && <View style={s.emptyWrap}><View style={s.emptyIcon}><Text style={s.emptyIconText}>✉</Text></View><Text style={s.emptyTitle}>{query.trim() ? "No results" : tab === "All" ? t("noChats") : "Nothing here yet"}</Text><Text style={s.emptyText}>{query.trim() ? "Try another name or message." : "Start a conversation and it will appear here. Your chats stay synced here once account sync is connected."}</Text><Pressable accessibilityRole="button" style={s.startButton} onPress={() => router.push("/new-chat")}><Text style={s.startButtonText}>{t("newMessage")}</Text></Pressable></View>}
         </ScrollView>
         <View style={s.bottom}>
-          <Pressable style={s.navItem} onPress={() => router.replace("/")}><Text style={s.navIcon}>◉</Text><Text style={s.bottomItemActive}>Chats</Text></Pressable>
-          <Pressable style={s.navItem} onPress={() => router.push("/contacts")}><Text style={s.navIcon}>♙</Text><Text style={s.bottomItem}>Contacts</Text></Pressable>
-          <Pressable style={s.navItem} onPress={() => router.push("/channels")}><Text style={s.navIcon}>▤</Text><Text style={s.bottomItem}>Channels</Text></Pressable>
-          <Pressable style={s.navItem} onPress={() => router.push("/settings")}><Text style={s.navIcon}>⚙</Text><Text style={s.bottomItem}>Settings</Text></Pressable>
+          <Pressable style={s.navItem} onPress={() => router.replace("/")}><Text style={s.navIcon}>◉</Text><Text style={s.bottomItemActive}>{t("allChats")}</Text></Pressable>
+          <Pressable style={s.navItem} onPress={() => router.push("/contacts")}><Text style={s.navIcon}>♙</Text><Text style={s.bottomItem}>{t("contacts")}</Text></Pressable>
+          <Pressable style={s.navItem} onPress={() => router.push("/channels")}><Text style={s.navIcon}>▤</Text><Text style={s.bottomItem}>{t("channels")}</Text></Pressable>
+          <Pressable style={s.navItem} onPress={() => router.push("/settings")}><Text style={s.navIcon}>⚙</Text><Text style={s.bottomItem}>{t("settings")}</Text></Pressable>
         </View>
       </View>
-      {desktop && <View style={s.conversation}><View style={s.welcome}><View style={s.welcomeLogo}><Text style={s.logoText}>N</Text></View><Text style={s.welcomeTitle}>NexGram</Text><Text style={s.welcomeText}>Choose a conversation from the list or start a new message.</Text><Pressable style={s.desktopButton} onPress={() => router.push("/new-chat")}><Text style={s.startButtonText}>＋  New message</Text></Pressable></View><Text style={s.desktopFoot}>Private conversations belong only to their participants.</Text></View>}
+      {desktop && <View style={s.conversation}><View style={s.welcome}><View style={s.welcomeLogo}><Text style={s.logoText}>N</Text></View><Text style={s.welcomeTitle}>NexGram</Text><Text style={s.welcomeText}>{t("chooseConversation")}</Text><Pressable style={s.desktopButton} onPress={() => router.push("/new-chat")}><Text style={s.startButtonText}>＋  New message</Text></Pressable></View><Text style={s.desktopFoot}>Private conversations belong only to their participants.</Text></View>}
     </View>
   );
 }
