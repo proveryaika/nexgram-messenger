@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Export web app
+        env:
+          EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
+          EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
         run: npx expo export --platform web --output-dir dist
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
