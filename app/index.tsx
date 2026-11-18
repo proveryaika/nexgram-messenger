@@ -36,9 +36,10 @@ export default function ChatsScreen() {
           {filteredChats.length === 0 && <View style={s.emptyWrap}><View style={s.emptyIcon}><Text style={s.emptyIconText}>✉</Text></View><Text style={s.emptyTitle}>{query.trim() ? "No results" : "No chats yet"}</Text><Text style={s.emptyText}>{query.trim() ? "Try another name or message." : "When someone messages you, the conversation will appear here. You can also start a new chat."}</Text><Pressable accessibilityRole="button" style={s.startButton} onPress={() => router.push("/contacts")}><Text style={s.startButtonText}>New message</Text></Pressable></View>}
         </ScrollView>
         <View style={s.bottom}>
+          <Pressable style={s.navItem} onPress={() => router.replace("/")}><Text style={s.navIcon}>◉</Text><Text style={s.bottomItem}>Chats</Text></Pressable>
           <Pressable style={s.navItem} onPress={() => router.push("/contacts")}><Text style={s.navIcon}>♙</Text><Text style={s.bottomItem}>Contacts</Text></Pressable>
-          <Pressable style={s.navItem} onPress={() => router.push("/channels")}><Text style={s.navIcon}>◉</Text><Text style={s.bottomItem}>Channels</Text></Pressable>
           <Pressable style={s.navItem} onPress={() => router.push("/settings")}><Text style={s.navIcon}>⚙</Text><Text style={s.bottomItem}>Settings</Text></Pressable>
+          <Pressable style={s.navItem} onPress={() => router.push("/profile")}><Text style={s.navIcon}>●</Text><Text style={s.bottomItem}>Profile</Text></Pressable>
         </View>
       </View>
       {desktop && <View style={s.conversation}><View style={s.welcome}><View style={s.welcomeLogo}><Text style={s.logoText}>N</Text></View><Text style={s.welcomeTitle}>NexGram</Text><Text style={s.welcomeText}>Select a chat or start a new conversation.</Text></View></View>}
