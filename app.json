@@ -6,7 +6,10 @@
     "version": "0.1.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      "expo-sqlite"
+    ],
     "experiments": {
       "typedRoutes": true,
       "baseUrl": "/nexgram-messenger"
@@ -15,7 +18,12 @@
       "bundler": "metro",
       "output": "static"
     },
-    "ios": { "supportsTablet": true, "bundleIdentifier": "com.nexgram.messenger" },
-    "android": { "package": "com.nexgram.messenger" }
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nexgram.messenger"
+    },
+    "android": {
+      "package": "com.nexgram.messenger"
+    }
   }
 }
