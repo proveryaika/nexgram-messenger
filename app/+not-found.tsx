@@ -1,0 +1,4 @@
+import { router } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+export default function NotFound(){return <View style={s.page}><Text style={s.code}>404</Text><Text style={s.title}>This page isn't here</Text><Pressable style={s.button} onPress={()=>router.replace("/")}><Text style={s.buttonText}>Back to chats</Text></Pressable></View>}
+const s=StyleSheet.create({page:{flex:1,backgroundColor:"#0B1018",alignItems:"center",justifyContent:"center",padding:24},code:{color:"#A99CFF",fontSize:54,fontWeight:"900"},title:{color:"#F4F7FB",fontSize:18,marginVertical:16},button:{backgroundColor:"#5144A7",paddingHorizontal:20,paddingVertical:12,borderRadius:14},buttonText:{color:"white",fontWeight:"700"}});
