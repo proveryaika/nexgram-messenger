@@ -23,7 +23,7 @@ export default function ChatsScreen() {
       <View style={s.sidebar}>
         <View style={s.top}>
           <View style={s.brandLine}><View style={s.logo}><Text style={s.logoText}>N</Text></View><View><Text style={s.kicker}>MESSENGER</Text><Text style={s.title}>NexGram</Text></View></View>
-          <Pressable accessibilityRole="button" accessibilityLabel="New message" style={s.newButton} onPress={() => router.push("/contacts")}><Text style={s.newButtonText}>＋</Text></Pressable>
+          <Pressable accessibilityRole="button" accessibilityLabel="New message" style={s.newButton} onPress={() => router.push("/new-chat")}><Text style={s.newButtonText}>＋</Text></Pressable>
         </View>
         <View style={s.search}><Text style={s.searchIcon}>⌕</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search messages or people" placeholderTextColor="#8190A3" style={s.searchInput}/></View>
         <View style={s.tabs}>{["All", "Personal", "Groups"].map(item => <Pressable key={item} onPress={() => setTab(item)} style={[s.tab, tab === item && s.tabActive]}><Text style={[s.tabText, tab === item && s.tabTextActive]}>{item}</Text></Pressable>)}</View>
@@ -33,7 +33,7 @@ export default function ChatsScreen() {
             <View style={[s.avatar, { backgroundColor: chat.color }]}><Text style={s.avatarText}>{chat.name.slice(0, 1)}</Text>{chat.online && <View style={s.onlineDot}/>}</View>
             <View style={s.chatCopy}><View style={s.chatHeading}><Text numberOfLines={1} style={s.name}>{chat.name}</Text><Text style={s.time}>{chat.time}</Text></View><View style={s.chatHeading}><Text numberOfLines={1} style={s.message}>{chat.message}</Text>{chat.unread > 0 && <View style={s.unread}><Text style={s.unreadText}>{chat.unread}</Text></View>}</View></View>
           </Pressable>)}
-          {filteredChats.length === 0 && <View style={s.emptyWrap}><View style={s.emptyIcon}><Text style={s.emptyIconText}>✉</Text></View><Text style={s.emptyTitle}>{query.trim() ? "No results" : "No chats yet"}</Text><Text style={s.emptyText}>{query.trim() ? "Try another name or message." : "When someone messages you, the conversation will appear here. You can also start a new chat."}</Text><Pressable accessibilityRole="button" style={s.startButton} onPress={() => router.push("/contacts")}><Text style={s.startButtonText}>New message</Text></Pressable></View>}
+          {filteredChats.length === 0 && <View style={s.emptyWrap}><View style={s.emptyIcon}><Text style={s.emptyIconText}>✉</Text></View><Text style={s.emptyTitle}>{query.trim() ? "No results" : "No chats yet"}</Text><Text style={s.emptyText}>{query.trim() ? "Try another name or message." : "When someone messages you, the conversation will appear here. You can also start a new chat."}</Text><Pressable accessibilityRole="button" style={s.startButton} onPress={() => router.push("/new-chat")}><Text style={s.startButtonText}>New message</Text></Pressable></View>}
         </ScrollView>
         <View style={s.bottom}>
           <Pressable style={s.navItem} onPress={() => router.replace("/")}><Text style={s.navIcon}>◉</Text><Text style={s.bottomItem}>Chats</Text></Pressable>
