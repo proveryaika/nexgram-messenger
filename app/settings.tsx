@@ -16,8 +16,8 @@ export default function Settings() {
   return <View style={s.page}>
     <View style={s.header}><Pressable accessibilityRole="button" onPress={() => router.back()}><Text style={s.back}>‹</Text></Pressable><Text style={s.title}>Settings</Text><View style={{flex:1}}/><Pressable accessibilityRole="button" onPress={() => router.push("/settings/privacy")}><Text style={s.search}>⌕</Text></Pressable></View>
     <ScrollView contentContainerStyle={{paddingBottom:28}}>
-      <Pressable style={s.profile} onPress={() => router.push("/settings/account")}>
-        <View style={s.avatar}><Text style={s.initial}>N</Text></View><View><Text style={s.profileName}>NexGram account</Text><Text style={s.muted}>Set up your profile</Text></View><Text style={s.chevron}>›</Text>
+      <Pressable style={s.profile} onPress={() => router.push("/login")}>
+        <View style={s.avatar}><Text style={s.initial}>N</Text></View><View><Text style={s.profileName}>Sign in with phone number</Text><Text style={s.muted}>Connect your NexGram account</Text></View><Text style={s.chevron}>›</Text>
       </Pressable>
       {rows.map((row) => <Pressable key={row.route} accessibilityRole="button" onPress={() => router.push({pathname:"/settings/[section]",params:{section:row.route}})} style={s.row}>
         <View style={s.iconBox}><Text style={s.icon}>{row.icon}</Text></View><View style={{flex:1}}><Text style={s.rowTitle}>{row.title}</Text><Text style={s.muted}>{row.sub}</Text></View><Text style={s.chevron}>›</Text>
