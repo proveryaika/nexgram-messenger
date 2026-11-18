@@ -38,7 +38,7 @@ export default function ChatsScreen() {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.tabs}>
           {filters.map(item => <Pressable key={item.id} onPress={() => setTab(item.id)} style={[s.tab, tab === item.id && s.tabActive]}><Text style={[s.tabText, tab === item.id && s.tabTextActive]}>{t(item.label)}</Text></Pressable>)}
         </ScrollView>
-        <View style={s.sectionLine}><Text style={s.sectionLabel}>{tab === "All" ? "ALL CHATS" : filters.find(item => item.id === tab)?.label.toUpperCase()}</Text><Text style={s.sectionCount}>{filteredChats.length}</Text></View>
+        <View style={s.sectionLine}><Text style={s.sectionLabel}>{tab === "All" ? t("allChats").toUpperCase() : t(filters.find(item => item.id === tab)?.label || "allChats").toUpperCase()}</Text><Text style={s.sectionCount}>{filteredChats.length}</Text></View>
         <ScrollView contentContainerStyle={s.list}>
           {filteredChats.map(chat => <Pressable key={chat.id} onPress={() => router.push({ pathname: "/chat/[id]", params: { id: chat.id, name: chat.name } })} style={s.chat}>
             <View style={[s.avatar, { backgroundColor: chat.color }]}><Text style={s.avatarText}>{chat.name.slice(0, 1)}</Text>{chat.online && <View style={s.onlineDot}/>}</View>
